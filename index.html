@@ -9,14 +9,14 @@
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800&family=Playfair+Display:ital,wght@1,400&display=swap');
 
         :root {
-            /* Palette */
             --gold-primary: #d4af37;
-            --gold-light: #f3e5ab;
             --black-base: #0a0a0a;
             --charcoal: #1c1c1c;
             --cream: #f9f7f2;
             --deep-loam: #2b2623;
-            --text-grey: #888;
+            --neon-blue: #00f3ff;
+            --accent-red: #ff4d4d;
+            --fresh-green: #2ecc71;
         }
 
         body, html {
@@ -34,14 +34,14 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 20px 40px;
+            padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
             box-sizing: border-box;
         }
 
@@ -51,262 +51,235 @@
             color: var(--gold-primary);
             text-transform: uppercase;
             cursor: pointer;
+            font-weight: 700;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
+        .nav-links { display: flex; gap: 30px; }
         .nav-item {
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: 0.3s;
+            color: #ccc; text-decoration: none; font-size: 0.8rem;
+            letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: 0.3s;
         }
+        .nav-item:hover, .nav-item.active { color: var(--gold-primary); }
 
-        .nav-item:hover, .nav-item.active {
-            color: var(--gold-primary);
-        }
-
-        /* --- PAGE SECTIONS (View Management) --- */
+        /* --- PAGE SECTIONS --- */
         section.page-view {
             display: none; /* Hidden by default */
             min-height: 100vh;
-            padding-top: 80px; /* Space for navbar */
+            padding-top: 80px;
             animation: fadeIn 0.6s ease-out;
         }
-
-        section.page-view.active {
-            display: block; /* Show only active page */
-        }
+        section.page-view.active { display: block; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- HOMEPAGE SPECIFIC STYLES --- */
-        .split-wrapper {
-            display: flex;
-            height: calc(100vh - 80px);
-            position: relative;
-            overflow: hidden;
-        }
-
+        /* --- 1. HOMEPAGE SPLIT DESIGN --- */
+        .split-wrapper { display: flex; height: calc(100vh - 80px); position: relative; overflow: hidden; }
         .pane {
-            width: 50%;
-            height: 100%;
-            position: relative;
-            transition: all 0.8s cubic-bezier(0.2, 1, 0.2, 1);
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
+            width: 50%; height: 100%; position: relative; transition: all 0.8s cubic-bezier(0.2, 1, 0.2, 1);
+            overflow: hidden; display: flex; align-items: center; justify-content: center; cursor: pointer;
             border-right: 1px solid rgba(255,255,255,0.05);
         }
-
         .pane-roots {
             background-color: #111;
             background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 4px);
         }
-
-        .pane-hive {
-            background-color: #050505;
+        .pane-hive { background-color: #050505; }
+        .honeycomb-bg {
+            position: absolute; width: 100%; height: 100%;
+            background-image: radial-gradient(circle, var(--gold-primary) 1px, transparent 1px);
+            background-size: 30px 30px; opacity: 0.1; transition: 0.5s;
         }
-
-        .honeycomb-grid {
-            position: absolute;
-            width: 100%; height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='40' height='70' viewBox='0 0 40 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L40 11.5V34.5L20 46L0 34.5V11.5L20 0Z' fill='none' stroke='%23d4af37' stroke-width='0.5'/%3E%3C/svg%3E");
-            opacity: 0.1;
-            transition: opacity 0.5s;
-        }
-
-        .pane:hover { width: 70%; z-index: 10; }
+        .pane:hover .honeycomb-bg { opacity: 0.2; }
         .split-wrapper:hover .pane:not(:hover) { width: 40%; opacity: 0.4; filter: grayscale(80%); }
+        .pane:hover { width: 60%; z-index: 10; }
         
-        .pane-content {
-            z-index: 5;
-            text-align: center;
-            transform: translateY(20px);
-            transition: transform 0.5s;
-            padding: 20px;
-        }
-        
+        .pane-content { text-align: center; transform: translateY(20px); transition: 0.5s; z-index: 5; }
         .pane:hover .pane-content { transform: translateY(0); }
-
-        .gen-label {
-            font-size: 0.8rem;
-            letter-spacing: 3px;
-            color: var(--gold-primary);
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        h2.hero-title {
-            font-family: 'Cinzel', serif;
-            font-size: 3.5rem;
-            margin: 0 0 15px 0;
-            line-height: 1;
-        }
+        .hero-title { font-family: 'Cinzel', serif; font-size: 3.5rem; margin: 10px 0; line-height: 1; }
+        .gen-label { font-size: 0.8rem; letter-spacing: 3px; color: var(--gold-primary); text-transform: uppercase; }
 
         .btn-enter {
-            margin-top: 30px;
-            padding: 15px 40px;
-            background: transparent;
-            border: 1px solid var(--gold-primary);
-            color: var(--gold-primary);
-            font-family: 'Montserrat', sans-serif;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: 0.3s;
+            margin-top: 30px; padding: 15px 40px; background: transparent;
+            border: 1px solid var(--gold-primary); color: var(--gold-primary);
+            font-family: 'Montserrat', sans-serif; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: 0.3s;
         }
+        .btn-enter:hover { background: var(--gold-primary); color: black; }
 
-        .btn-enter:hover {
-            background: var(--gold-primary);
-            color: black;
-        }
-
-        /* --- HERITAGE PAGE STYLES --- */
-        #heritage {
-            background-color: var(--cream);
-            color: var(--black-base);
-        }
-
-        .collection-header {
-            text-align: center;
-            padding: 60px 20px;
-        }
-
-        .page-title {
-            font-family: 'Cinzel', serif;
-            font-size: 3rem;
-            margin-bottom: 10px;
-            color: var(--black-base);
-        }
+        /* --- COLLECTION PAGES (SHARED STYLES) --- */
+        .collection-header { text-align: center; padding: 40px 20px 20px 20px; }
+        .page-title { font-family: 'Cinzel', serif; font-size: 3rem; margin-bottom: 10px; }
+        .page-subtitle { font-family: 'Playfair Display', serif; font-style: italic; color: #888; margin-bottom: 20px; }
         
-        .page-subtitle {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            color: #666;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto 60px auto;
-            padding: 0 20px;
-        }
-
-        .product-card {
-            background: white;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            border: 1px solid #ddd;
-        }
-
-        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
-
-        .card-img-placeholder {
-            height: 350px;
-            background-color: #f0f0f0;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 3rem; color: #ccc;
-        }
-
-        .card-details { padding: 20px; text-align: center; }
-        .product-name { font-family: 'Cinzel', serif; font-size: 1.1rem; margin: 5px 0; }
-        .product-price { color: #b8860b; font-weight: 600; }
-
-        /* --- HIVE PAGE STYLES --- */
-        #hive {
-            background-color: #050505;
-            background-image: radial-gradient(circle, #1a1a1a 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-
-        .hive-title {
-            color: white;
-            background: linear-gradient(to right, #fff, #999);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .tech-card {
-            background: var(--charcoal);
-            border: 1px solid #333;
-            transition: 0.3s;
-        }
-
-        .tech-card:hover {
-            border-color: var(--gold-primary);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-        }
-
-        .tech-img {
-            height: 400px;
-            background: #111;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 4rem;
-        }
-        
-        .tech-info { padding: 20px; border-top: 1px solid #333; display: flex; justify-content: space-between; }
-        .tech-name { font-weight: 600; color: white; }
-        .tech-price { color: var(--gold-primary); }
-
-        /* --- STORY PAGE STYLES --- */
-        .story-hero {
-            height: 50vh;
-            display: flex; align-items: center; justify-content: center;
-            text-align: center;
-            background: radial-gradient(circle, #222 0%, #000 100%);
-        }
-        
-        .story-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 80px 20px;
-        }
-        
-        .chapter {
-            margin-bottom: 60px;
-            border-left: 2px solid var(--gold-primary);
-            padding-left: 30px;
-        }
-        
-        .chapter p {
-            line-height: 1.8;
+        .section-intro {
+            max-width: 700px;
+            margin: 0 auto 30px auto;
             font-size: 1.1rem;
-            color: #ccc;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            background: #000;
-            padding: 40px;
-            text-align: center;
-            border-top: 1px solid #333;
-            font-size: 0.8rem;
+            line-height: 1.6;
             color: #666;
         }
 
-        /* --- MOBILE --- */
+        /* --- ENGAGEMENT: JOURNEY BAR (Heritage) --- */
+        .journey-bar {
+            display: flex; justify-content: center; align-items: center; gap: 30px; margin: 30px auto 50px auto;
+            max-width: 800px; padding: 20px; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;
+        }
+        .journey-step { text-align: center; opacity: 0.7; transition: 0.3s; }
+        .journey-step:hover { opacity: 1; transform: translateY(-3px); }
+        .j-icon { font-size: 1.5rem; display: block; margin-bottom: 5px; }
+        .j-text { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--deep-loam); }
+        .j-arrow { color: #ccc; }
+
+        /* --- ENGAGEMENT: WEAVER QUOTE (Heritage) --- */
+        .weaver-quote {
+            text-align: center; font-family: 'Playfair Display', serif; font-size: 1.4rem; font-style: italic;
+            color: var(--deep-loam); background: rgba(0,0,0,0.03); padding: 40px; margin: 40px auto; max-width: 600px;
+            border-left: 3px solid var(--gold-primary);
+        }
+
+        /* --- ENGAGEMENT: TECH MARQUEE (Hive) --- */
+        .marquee-container {
+            width: 100%; overflow: hidden; background: #111; border-top: 1px solid #333; border-bottom: 1px solid #333;
+            padding: 15px 0; margin-bottom: 40px; white-space: nowrap;
+        }
+        .marquee-content { display: inline-block; animation: scroll 20s linear infinite; }
+        .marquee-item {
+            color: #888; font-family: 'Montserrat', sans-serif; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 2px; margin-right: 50px; font-size: 0.8rem;
+        }
+        .marquee-item span { color: var(--gold-primary); }
+        
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* --- ENGAGEMENT: HIVE TECH GRID --- */
+        .hive-tech-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;
+            max-width: 800px; margin: 0 auto 50px auto; padding: 0 20px;
+        }
+        .tech-box {
+            background: #0a0a0a; border: 1px solid #333; padding: 20px; text-align: center; transition: 0.3s;
+        }
+        .tech-box:hover { border-color: var(--neon-blue); box-shadow: 0 0 15px rgba(0, 243, 255, 0.2); }
+        .tb-icon { font-size: 2rem; margin-bottom: 10px; display: block; }
+        .tb-title { font-size: 0.8rem; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- CATEGORY CARDS --- */
+        .category-view {
+            max-width: 1000px; margin: 0 auto 60px auto; display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 0 20px;
+        }
+        .cat-card {
+            height: 250px; background: #1a1a1a; border: 1px solid #333; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; cursor: pointer; transition: 0.4s; position: relative; overflow: hidden;
+        }
+        .cat-card:hover {
+            transform: translateY(-5px) scale(1.02); border-color: var(--gold-primary); box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .cat-icon { font-size: 3rem; margin-bottom: 15px; }
+        .cat-name { font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 1px; z-index: 2; }
+        
+        /* Heritage Specifics */
+        #heritage .cat-card { background: white; border: 1px solid #ddd; color: var(--black-base); }
+        #heritage .cat-card:hover { border-color: var(--black-base); background: #fafafa; }
+
+        /* --- FEATURED SECTIONS (BEST SELLERS & NEW ARRIVALS) --- */
+        .featured-section {
+            max-width: 1200px; margin: 0 auto 80px auto; padding: 0 20px;
+        }
+        .feat-title {
+            text-align: center; font-family: 'Cinzel', serif; font-size: 2rem; margin-bottom: 30px;
+            display: flex; align-items: center; justify-content: center; gap: 15px;
+        }
+        .feat-title::before, .feat-title::after {
+            content: ''; height: 1px; width: 50px; background: var(--gold-primary); display: block;
+        }
+        
+        .feat-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;
+        }
+        
+        .feat-card {
+            background: #111; border: 1px solid #222; position: relative; cursor: pointer; transition: 0.3s;
+        }
+        .feat-card:hover { transform: translateY(-5px); border-color: var(--gold-primary); }
+        
+        .feat-badge {
+            position: absolute; top: 10px; left: 10px; background: var(--gold-primary); color: black;
+            padding: 5px 10px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; z-index: 2;
+        }
+        .badge-fresh { background: var(--fresh-green); color: white; }
+        
+        .feat-img {
+            height: 300px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #333;
+            overflow: hidden;
+        }
+        /* IMAGE FIX: This ensures your photos fit perfectly */
+        .feat-img img, .card-img img {
+            width: 100%; height: 100%; object-fit: cover; object-position: top;
+        }
+
+        .feat-info { padding: 15px; text-align: center; }
+        .feat-name { display: block; font-family: 'Cinzel', serif; margin-bottom: 5px; color: white; font-size: 1rem; }
+        .feat-price { color: var(--gold-primary); font-weight: 600; font-size: 0.9rem; }
+        
+        /* Heritage Specifics */
+        #heritage .feat-card { background: white; border: 1px solid #eee; }
+        #heritage .feat-img { background: #f9f9f9; color: #ddd; }
+        #heritage .feat-name { color: var(--black-base); }
+
+        /* --- PRODUCT VIEW (Hidden initially) --- */
+        .product-view-container { display: none; }
+        .product-view-container.active { display: block; animation: fadeIn 0.5s; }
+
+        .back-btn {
+            display: inline-block; margin: 0 auto 30px auto; background: transparent; border: none;
+            color: #888; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 2px;
+            cursor: pointer; font-size: 0.9rem; padding-bottom: 5px; border-bottom: 1px solid transparent;
+        }
+        .back-btn:hover { border-color: var(--gold-primary); color: var(--gold-primary); }
+
+        /* GRID SYSTEM */
+        .grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px;
+            max-width: 1200px; margin: 0 auto 60px auto; padding: 0 20px;
+        }
+        .product-card {
+            background: #111; border: 1px solid #222; transition: 0.4s; cursor: pointer; position: relative;
+        }
+        .product-card:hover { transform: translateY(-5px); border-color: var(--gold-primary); }
+        .product-card.hidden { display: none; }
+
+        .card-img {
+            height: 320px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #333;
+            overflow: hidden;
+        }
+
+        .card-info { padding: 20px; text-align: center; }
+        .p-name { display: block; font-family: 'Cinzel', serif; margin-bottom: 5px; color: white; }
+        .p-price { color: var(--gold-primary); font-weight: 600; font-size: 0.9rem; }
+        .p-cat { font-size: 0.65rem; text-transform: uppercase; color: #555; letter-spacing: 1px; margin-bottom: 5px; display: block; }
+
+        #heritage { background-color: var(--cream); color: var(--black-base); }
+        #heritage .page-title { color: var(--black-base); }
+        #heritage .product-card { background: white; border-color: #ddd; }
+        #heritage .p-name { color: var(--black-base); }
+        #heritage .card-img { background: #f4f4f4; color: #ccc; }
+
+        /* FOOTER */
+        footer {
+            background: #050505; padding: 40px; text-align: center; border-top: 1px solid #222;
+            font-size: 0.8rem; color: #666;
+        }
+
+        /* MOBILE */
         @media (max-width: 768px) {
             .split-wrapper { flex-direction: column; height: auto; }
             .pane { width: 100% !important; height: 50vh; }
-            nav { padding: 15px 20px; }
-            .nav-links { gap: 15px; }
-            .nav-item { font-size: 0.7rem; }
-            h2.hero-title, .page-title { font-size: 2rem; }
+            .journey-bar { flex-wrap: wrap; gap: 10px; }
+            .hero-title { font-size: 2.5rem; }
+            .nav-logo { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -314,110 +287,374 @@
 
     <!-- NAVIGATION -->
     <nav>
-        <div class="nav-logo" onclick="switchTab('home')">KHADI HIVE</div>
+        <div class="nav-logo" onclick="switchSection('home')">KHADI HIVE</div>
         <div class="nav-links">
-            <a class="nav-item" onclick="switchTab('heritage')">Heritage</a>
-            <a class="nav-item" onclick="switchTab('hive')">Hive Tech</a>
-            <a class="nav-item" onclick="switchTab('story')">Story</a>
+            <a class="nav-item" onclick="switchSection('heritage')">Pure Khadi</a>
+            <a class="nav-item" onclick="switchSection('hive')">Khadi X Hive</a>
+            <a class="nav-item" onclick="switchSection('story')">Story</a>
         </div>
     </nav>
 
     <!-- 1. HOME SECTION -->
     <section id="home" class="page-view active">
         <div class="split-wrapper">
-            <!-- Left Pane -->
-            <div class="pane pane-roots" onclick="switchTab('heritage')">
+            <!-- Left: Heritage -->
+            <div class="pane pane-roots" onclick="switchSection('heritage')">
                 <div class="pane-content">
-                    <span class="gen-label">For The Elders</span>
-                    <h2 class="hero-title">Pure Legacy</h2>
-                    <p style="color: #ccc; margin-bottom: 30px;">Undefined softness for the purist.</p>
+                    <span class="gen-label">For Elders</span>
+                    <h2 class="hero-title">Pure<br>Khadi</h2>
+                    <p style="color: #aaa; margin-bottom: 30px;">Kurta • Lungi • Jacket</p>
                     <button class="btn-enter">Enter Heritage</button>
                 </div>
             </div>
-            <!-- Right Pane -->
-            <div class="pane pane-hive" onclick="switchTab('hive')">
-                <div class="honeycomb-grid"></div>
+            <!-- Right: Hive -->
+            <div class="pane pane-hive" onclick="switchSection('hive')">
+                <div class="honeycomb-bg"></div>
                 <div class="pane-content">
-                    <span class="gen-label">For The New Gen</span>
-                    <h2 class="hero-title">Hive X Tech</h2>
-                    <p style="color: #ccc; margin-bottom: 30px;">Khadi re-engineered for the streets.</p>
-                    <button class="btn-enter">Enter The Hive</button>
+                    <span class="gen-label">For Gen Z</span>
+                    <h2 class="hero-title">Khadi<br>X Hive</h2>
+                    <p style="color: #aaa; margin-bottom: 30px;">Hoodies • Tracks • Tech</p>
+                    <button class="btn-enter">Enter Hive</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 2. HERITAGE SECTION -->
+    <!-- 2. HERITAGE SECTION (PURE KHADI) -->
     <section id="heritage" class="page-view">
         <div class="collection-header">
-            <h1 class="page-title">The Heritage Edit</h1>
-            <p class="page-subtitle">Timeless garments designed for dignity and grace.</p>
+            <h1 class="page-title">Pure Khadi</h1>
+            <p class="page-subtitle">The Heritage Collection</p>
+            
+            <p class="section-intro">
+                Step into a world where time slows down. Our Heritage collection honours the spinning wheel, bringing you garments that breathe, drape, and age with dignity.
+            </p>
+
+            <!-- ENGAGEMENT: THE JOURNEY -->
+            <div class="journey-bar">
+                <div class="journey-step"><span class="j-icon">🌱</span><span class="j-text">Organic</span></div>
+                <div class="j-arrow">→</div>
+                <div class="journey-step"><span class="j-icon">🧶</span><span class="j-text">Hand Spun</span></div>
+                <div class="j-arrow">→</div>
+                <div class="journey-step"><span class="j-icon">🧵</span><span class="j-text">Hand Woven</span></div>
+                <div class="j-arrow">→</div>
+                <div class="journey-step"><span class="j-icon">❤️</span><span class="j-text">Comfort</span></div>
+            </div>
+
+            <!-- ENGAGEMENT: WEAVER'S VOICE -->
+            <div class="weaver-quote">
+                "We don't just weave thread. We weave time, patience, and the soul of the village into every inch of fabric."
+                <div style="font-size: 0.9rem; margin-top: 15px; font-weight: bold;">— Ramu Kaka, Master Weaver</div>
+            </div>
         </div>
-        <div class="grid">
-            <div class="product-card">
-                <div class="card-img-placeholder">🥋</div>
-                <div class="card-details">
-                    <h3 class="product-name">Elder's Silk Kurta</h3>
-                    <span class="product-price">₹ 2,499</span>
+
+        <!-- CATEGORIES -->
+        <div id="heritage-cats" class="category-view">
+            <div class="cat-card" onclick="openCategory('heritage', 'kurta')">
+                <div class="cat-icon">🥋</div><div class="cat-name">Kurtas</div>
+            </div>
+            <div class="cat-card" onclick="openCategory('heritage', 'pajama')">
+                <div class="cat-icon">👖</div><div class="cat-name">Pajamas</div>
+            </div>
+            <div class="cat-card" onclick="openCategory('heritage', 'jacket')">
+                <div class="cat-icon">🧥</div><div class="cat-name">Jackets</div>
+            </div>
+            <div class="cat-card" onclick="openCategory('heritage', 'lungi')">
+                <div class="cat-icon">🧣</div><div class="cat-name">Lungis</div>
+            </div>
+            <div class="cat-card" onclick="openCategory('heritage', 'shirt')">
+                <div class="cat-icon">👔</div><div class="cat-name">Shirts</div>
+            </div>
+        </div>
+
+        <!-- BEST SELLERS: HERITAGE -->
+        <div class="featured-section">
+            <h3 class="feat-title">Heritage Best Sellers</h3>
+            <div class="feat-grid">
+                <div class="feat-card">
+                    <div class="feat-badge">Most Loved</div>
+                    <div class="feat-img">
+                        <img src="K6.jpg" alt="Coffee Brown Kurta">
+                    </div>
+                    <div class="feat-info">
+                        <span class="feat-name">Coffee Brown Heritage Kurta</span>
+                        <span class="feat-price">₹ 1,800</span>
+                    </div>
+                </div>
+                <div class="feat-card">
+                    <div class="feat-badge">Classic</div>
+                    <div class="feat-img">
+                        <img src="K5.jpg" alt="Maroon Earth Kurta">
+                    </div>
+                    <div class="feat-info">
+                        <span class="feat-name">Maroon Earth Spun Kurta</span>
+                        <span class="feat-price">₹ 1,799</span>
+                    </div>
+                </div>
+                <div class="feat-card">
+                    <div class="feat-badge">Comfort</div>
+                    <div class="feat-img">
+                        <img src="K2.jpg" alt="Slate Grey Kurta">
+                    </div>
+                    <div class="feat-info">
+                        <span class="feat-name">Slate Grey Classic</span>
+                        <span class="feat-price">₹ 1,699</span>
+                    </div>
                 </div>
             </div>
-            <div class="product-card">
-                <div class="card-img-placeholder">👖</div>
-                <div class="card-details">
-                    <h3 class="product-name">Relaxed Cotton Pajama</h3>
-                    <span class="product-price">₹ 999</span>
+        </div>
+
+        <!-- NEW ARRIVALS: HERITAGE -->
+        <div class="featured-section">
+            <h3 class="feat-title">New Arrivals</h3>
+            <div class="feat-grid">
+                <div class="feat-card">
+                    <div class="feat-badge badge-fresh">Just In</div>
+                    <div class="feat-img">
+                        <img src="K8.jpg" alt="Saffron Glow Kurta">
+                    </div>
+                    <div class="feat-info">
+                        <span class="feat-name">Saffron Glow Kurta</span>
+                        <span class="feat-price">₹ 1,550</span>
+                    </div>
+                </div>
+                <div class="feat-card">
+                    <div class="feat-badge badge-fresh">Just In</div>
+                    <div class="feat-img">
+                        <img src="K4.jpg" alt="Azure Sky Kurta">
+                    </div>
+                    <div class="feat-info">
+                        <span class="feat-name">Azure Sky Linear Kurta</span>
+                        <span class="feat-price">₹ 1,399</span>
+                    </div>
+                </div>
+                <div class="feat-card">
+                    <div class="feat-badge badge-fresh">New Season</div>
+                    <div class="feat-img">
+                        <img src="K1.jpg" alt="Peach Sunrise Kurta">
+                    </div>
+                    <div class="feat-info">
+                        <span class="feat-name">Peach Sunrise Kurta</span>
+                        <span class="feat-price">₹ 1,499</span>
+                    </div>
                 </div>
             </div>
-            <div class="product-card">
-                <div class="card-img-placeholder">🧥</div>
-                <div class="card-details">
-                    <h3 class="product-name">Nehru Vest (Raw Silk)</h3>
-                    <span class="product-price">₹ 1,899</span>
-                </div>
+        </div>
+
+        <!-- PRODUCT LIST (HIDDEN) -->
+        <div id="heritage-products" class="product-view-container">
+            <div style="text-align: center;">
+                <button class="back-btn" onclick="resetCategories('heritage')">← Back to Categories</button>
             </div>
-            <div class="product-card">
-                <div class="card-img-placeholder">🧣</div>
-                <div class="card-details">
-                    <h3 class="product-name">Premium Handloom Lungi</h3>
-                    <span class="product-price">₹ 799</span>
+            <div class="grid" id="heritage-grid">
+                <!-- Product 1 -->
+                <div class="product-card" data-category="kurta">
+                    <div class="card-img"><img src="K1.jpg" alt="Peach Kurta"></div>
+                    <div class="card-info"><span class="p-cat">Kurta</span><span class="p-name">Peach Sunrise Kurta</span><span class="p-price">₹ 1,499</span></div>
+                </div>
+                <!-- Product 2 -->
+                <div class="product-card" data-category="kurta">
+                    <div class="card-img"><img src="K2.jpg" alt="Grey Kurta"></div>
+                    <div class="card-info"><span class="p-cat">Kurta</span><span class="p-name">Slate Grey Classic</span><span class="p-price">₹ 1,699</span></div>
+                </div>
+                <!-- Product 3 -->
+                <div class="product-card" data-category="kurta">
+                    <div class="card-img"><img src="K3.jpg" alt="Silver Kurta"></div>
+                    <div class="card-info"><span class="p-cat">Kurta</span><span class="p-name">Striped Silver Kurta</span><span class="p-price">₹ 1,599</span></div>
+                </div>
+                <!-- Product 4 -->
+                <div class="product-card" data-category="kurta">
+                    <div class="card-img"><img src="K4.jpg" alt="Azure Kurta"></div>
+                    <div class="card-info"><span class="p-cat">Kurta</span><span class="p-name">Azure Sky Linear</span><span class="p-price">₹ 1,399</span></div>
+                </div>
+                <!-- Product 5 -->
+                <div class="product-card" data-category="kurta">
+                    <div class="card-img"><img src="K5.jpg" alt="Maroon Kurta"></div>
+                    <div class="card-info"><span class="p-cat">Kurta</span><span class="p-name">Maroon Earth Spun</span><span class="p-price">₹ 1,799</span></div>
+                </div>
+                <!-- Product 6 -->
+                <div class="product-card" data-category="kurta">
+                    <div class="card-img"><img src="K6.jpg" alt="Coffee Kurta"></div>
+                    <div class="card-info"><span class="p-cat">Kurta</span><span class="p-name">Coffee Brown Heritage</span><span class="p-price">₹ 1,800</span></div>
+                </div>
+                <!-- Product 7 -->
+                <div class="product-card" data-category="kurta">
+                    <div class="card-img"><img src="K7.jpg" alt="Cream Kurta"></div>
+                    <div class="card-info"><span class="p-cat">Kurta</span><span class="p-name">Cream Elegance Kurta</span><span class="p-price">₹ 1,299</span></div>
+                </div>
+                <!-- Product 8 -->
+                <div class="product-card" data-category="kurta">
+                    <div class="card-img"><img src="K8.jpg" alt="Saffron Kurta"></div>
+                    <div class="card-info"><span class="p-cat">Kurta</span><span class="p-name">Saffron Glow Kurta</span><span class="p-price">₹ 1,550</span></div>
+                </div>
+                
+                <!-- Placeholders for other categories so grid isn't empty when filtered -->
+                <div class="product-card" data-category="pajama">
+                    <div class="card-img"><span style="font-size: 3rem;">👖</span></div>
+                    <div class="card-info"><span class="p-cat">Pajama</span><span class="p-name">Classic Cotton Pajama</span><span class="p-price">₹ 999</span></div>
+                </div>
+                <div class="product-card" data-category="jacket">
+                    <div class="card-img"><span style="font-size: 3rem;">🧥</span></div>
+                    <div class="card-info"><span class="p-cat">Jacket</span><span class="p-name">Nehru Vest</span><span class="p-price">₹ 1,899</span></div>
+                </div>
+                <div class="product-card" data-category="lungi">
+                    <div class="card-img"><span style="font-size: 3rem;">🧣</span></div>
+                    <div class="card-info"><span class="p-cat">Lungi</span><span class="p-name">Handloom White Lungi</span><span class="p-price">₹ 799</span></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 3. HIVE TECH SECTION -->
+    <!-- 3. HIVE SECTION (KHADI X HIVE) -->
     <section id="hive" class="page-view">
         <div class="collection-header">
-            <h1 class="page-title hive-title">HIVE SERIES</h1>
-            <p class="page-subtitle" style="color: var(--gold-primary);">Khadi X Honeycomb Structure</p>
+            <h1 class="page-title" style="color:white">Khadi X Hive</h1>
+            <p class="page-subtitle" style="color: var(--gold-primary)">Gen Z Structure. Future Comfort.</p>
+
+            <p class="section-intro" style="color: #999;">
+                The future doesn't wait. We've taken the ancient science of Khadi and re-engineered it with a honeycomb weave. It’s thermal-regulating, sweat-wicking, and built for the streets.
+            </p>
         </div>
-        <div class="grid">
-            <div class="tech-card">
-                <div class="tech-img">🧥</div>
-                <div class="tech-info">
-                    <span class="tech-name">Honeycomb Bomber</span>
-                    <span class="tech-price">₹ 3,499</span>
+
+        <!-- ENGAGEMENT: TECH MARQUEE -->
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <span class="marquee-item"><span>//</span> Thermal Regulation</span>
+                <span class="marquee-item"><span>//</span> Moisture Wicking</span>
+                <span class="marquee-item"><span>//</span> 3D Weave Structure</span>
+                <span class="marquee-item"><span>//</span> Sustainable Tech</span>
+                <span class="marquee-item"><span>//</span> Airflow Optimized</span>
+                <span class="marquee-item"><span>//</span> Thermal Regulation</span>
+                <span class="marquee-item"><span>//</span> Moisture Wicking</span>
+            </div>
+        </div>
+
+        <!-- ENGAGEMENT: HIVE TECH GRID -->
+        <div class="hive-tech-grid">
+            <div class="tech-box">
+                <span class="tb-icon">🌡️</span>
+                <span class="tb-title">Auto-Cooling</span>
+            </div>
+            <div class="tech-box">
+                <span class="tb-icon">🧬</span>
+                <span class="tb-title">Bio-Structure</span>
+            </div>
+            <div class="tech-box">
+                <span class="tb-icon">🔁</span>
+                <span class="tb-title">4-Way Stretch</span>
+            </div>
+            <div class="tech-box">
+                <span class="tb-icon">💧</span>
+                <span class="tb-title">Quick Dry</span>
+            </div>
+        </div>
+
+        <!-- CATEGORIES -->
+        <div id="hive-cats" class="category-view">
+            <div class="cat-card" onclick="openCategory('hive', 'hoodie')">
+                <div class="cat-icon">🧥</div><div class="cat-name">Hoodies</div>
+            </div>
+            <div class="cat-card" onclick="openCategory('hive', 'track')">
+                <div class="cat-icon">🏃</div><div class="cat-name">Tracks</div>
+            </div>
+            <div class="cat-card" onclick="openCategory('hive', 'shirt')">
+                <div class="cat-icon">👔</div><div class="cat-name">Tech Shirts</div>
+            </div>
+            <div class="cat-card" onclick="openCategory('hive', 'pajama')">
+                <div class="cat-icon">🛌</div><div class="cat-name">Pajamas</div>
+            </div>
+            <div class="cat-card" onclick="openCategory('hive', 'trouser')">
+                <div class="cat-icon">👖</div><div class="cat-name">Trousers</div>
+            </div>
+        </div>
+
+        <!-- BEST SELLERS: HIVE -->
+        <div class="featured-section">
+            <h3 class="feat-title" style="color: white;">Trending Drops</h3>
+            <div class="feat-grid">
+                <div class="feat-card">
+                    <div class="feat-badge" style="background: var(--neon-blue);">Sold Fast</div>
+                    <div class="feat-img"><span style="font-size: 3rem;">🧥</span></div>
+                    <div class="feat-info">
+                        <span class="feat-name">Stealth Black Hoodie</span>
+                        <span class="feat-price">₹ 3,499</span>
+                    </div>
+                </div>
+                <div class="feat-card">
+                    <div class="feat-badge" style="background: var(--neon-blue);">New Tech</div>
+                    <div class="feat-img"><span style="font-size: 3rem;">🏃</span></div>
+                    <div class="feat-info">
+                        <span class="feat-name">Hive Tech Joggers</span>
+                        <span class="feat-price">₹ 2,199</span>
+                    </div>
+                </div>
+                <div class="feat-card">
+                    <div class="feat-badge" style="background: var(--neon-blue);">Hot</div>
+                    <div class="feat-img"><span style="font-size: 3rem;">👔</span></div>
+                    <div class="feat-info">
+                        <span class="feat-name">Oversized Khadi Tee</span>
+                        <span class="feat-price">₹ 1,499</span>
+                    </div>
                 </div>
             </div>
-            <div class="tech-card">
-                <div class="tech-img">👕</div>
-                <div class="tech-info">
-                    <span class="tech-name">Structure Hoodie</span>
-                    <span class="tech-price">₹ 2,199</span>
+        </div>
+
+        <!-- NEW ARRIVALS: HIVE -->
+        <div class="featured-section">
+            <h3 class="feat-title" style="color: white;">Fresh Arrivals</h3>
+            <div class="feat-grid">
+                <div class="feat-card">
+                    <div class="feat-badge badge-fresh">Fresh Drop</div>
+                    <div class="feat-img"><span style="font-size: 3rem;">🦺</span></div>
+                    <div class="feat-info">
+                        <span class="feat-name">Cyber-Grid Vest</span>
+                        <span class="feat-price">₹ 2,899</span>
+                    </div>
+                </div>
+                <div class="feat-card">
+                    <div class="feat-badge badge-fresh">Fresh Drop</div>
+                    <div class="feat-img"><span style="font-size: 3rem;">👖</span></div>
+                    <div class="feat-info">
+                        <span class="feat-name">Neon-Stitch Tracks</span>
+                        <span class="feat-price">₹ 2,399</span>
+                    </div>
+                </div>
+                <div class="feat-card">
+                    <div class="feat-badge badge-fresh">Ltd Edition</div>
+                    <div class="feat-img"><span style="font-size: 3rem;">👕</span></div>
+                    <div class="feat-info">
+                        <span class="feat-name">Hive Mesh Polo</span>
+                        <span class="feat-price">₹ 1,899</span>
+                    </div>
                 </div>
             </div>
-            <div class="tech-card">
-                <div class="tech-img">👔</div>
-                <div class="tech-info">
-                    <span class="tech-name">Oversized Khadi Tee</span>
-                    <span class="tech-price">₹ 1,499</span>
-                </div>
+        </div>
+
+        <!-- PRODUCT LIST (HIDDEN) -->
+        <div id="hive-products" class="product-view-container">
+            <div style="text-align: center;">
+                <button class="back-btn" onclick="resetCategories('hive')">← Back to Categories</button>
             </div>
-            <div class="tech-card">
-                <div class="tech-img">👖</div>
-                <div class="tech-info">
-                    <span class="tech-name">Tech Joggers</span>
-                    <span class="tech-price">₹ 1,999</span>
+            <div class="grid" id="hive-grid">
+                <div class="product-card" data-category="hoodie">
+                    <div class="card-img"><span style="font-size: 3rem;">🧥</span></div>
+                    <div class="card-info"><span class="p-cat">Hoodie</span><span class="p-name">Structure Black Hoodie</span><span class="p-price">₹ 2,999</span></div>
+                </div>
+                <div class="product-card" data-category="track">
+                    <div class="card-img"><span style="font-size: 3rem;">🏃</span></div>
+                    <div class="card-info"><span class="p-cat">Tracks</span><span class="p-name">Hive Joggers</span><span class="p-price">₹ 1,899</span></div>
+                </div>
+                <div class="product-card" data-category="shirt">
+                    <div class="card-img"><span style="font-size: 3rem;">👔</span></div>
+                    <div class="card-info"><span class="p-cat">Shirt</span><span class="p-name">Oversized Tech Tee</span><span class="p-price">₹ 1,499</span></div>
+                </div>
+                <div class="product-card" data-category="pajama">
+                    <div class="card-img"><span style="font-size: 3rem;">🛌</span></div>
+                    <div class="card-info"><span class="p-cat">Pajama</span><span class="p-name">Lounge Hive Pants</span><span class="p-price">₹ 1,199</span></div>
+                </div>
+                <div class="product-card" data-category="trouser">
+                    <div class="card-img"><span style="font-size: 3rem;">👖</span></div>
+                    <div class="card-info"><span class="p-cat">Trouser</span><span class="p-name">Smart Khadi Chino</span><span class="p-price">₹ 2,100</span></div>
                 </div>
             </div>
         </div>
@@ -425,52 +662,62 @@
 
     <!-- 4. STORY SECTION -->
     <section id="story" class="page-view">
-        <div class="story-hero">
+        <div style="height: 50vh; display: flex; align-items: center; justify-content: center; text-align: center; background: radial-gradient(circle, #222 0%, #000 100%);">
             <div>
                 <h1 class="page-title" style="color: var(--gold-primary);">Crafted by the Nation</h1>
                 <p style="letter-spacing: 3px; text-transform: uppercase;">For Every Generation</p>
             </div>
         </div>
-        <div class="story-content">
-            <div class="chapter">
+        <div style="max-width: 800px; margin: 0 auto; padding: 60px 20px;">
+            <div style="margin-bottom: 50px; border-left: 2px solid var(--gold-primary); padding-left: 20px;">
                 <h2 style="font-family: 'Cinzel', serif; color: white;">The Legacy</h2>
-                <p>Khadi is not just a fabric; it is the freedom of India spun into thread. We honor this tradition by sourcing 100% hand-spun cotton from rural artisans.</p>
+                <p style="color: #ccc; line-height: 1.6;">Khadi is the fabric of freedom. For our Heritage collection, we source 100% hand-spun cotton, ensuring dignity and comfort for the elder generation.</p>
             </div>
-            <div class="chapter">
+            <div style="margin-bottom: 50px; border-left: 2px solid var(--gold-primary); padding-left: 20px;">
                 <h2 style="font-family: 'Cinzel', serif; color: white;">The Innovation</h2>
-                <p>We asked: "Can Khadi be high-tech?" By weaving Khadi yarns into a 3D Honeycomb structure, we created the Hive Series—tech-wear born from the village loom.</p>
+                <p style="color: #ccc; line-height: 1.6;">For Gen Z, we evolved. We wove Khadi into a 3D Honeycomb structure. Breathable like the past, durable for the future. This is Hive.</p>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div style="font-family: 'Cinzel', serif; font-size: 1.5rem; color: white; margin-bottom: 10px;">KHADI HIVE</div>
         <p>&copy; 2024 Khadi Hive. All Rights Reserved.</p>
     </footer>
 
-    <!-- JAVASCRIPT FOR ROUTING -->
+    <!-- LOGIC -->
     <script>
-        function switchTab(tabId) {
-            // 1. Hide all sections
-            const sections = document.querySelectorAll('.page-view');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
-
-            // 2. Show the selected section
-            const activeSection = document.getElementById(tabId);
-            if (activeSection) {
-                activeSection.classList.add('active');
-            }
-
-            // 3. Scroll to top
+        // 1. SWITCHING MAIN PAGES
+        function switchSection(id) {
+            resetCategories('heritage');
+            resetCategories('hive');
+            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
             window.scrollTo(0, 0);
+        }
 
-            // 4. Update Navigation Styles
-            const navLinks = document.querySelectorAll('.nav-item');
-            navLinks.forEach(link => link.classList.remove('active'));
-            // (Optional: You could add active class to clicked link here logic)
+        // 2. OPENING A SPECIFIC CATEGORY
+        function openCategory(sectionId, category) {
+            document.getElementById(sectionId + '-cats').style.display = 'none';
+            document.getElementById(sectionId + '-products').classList.add('active');
+            const container = document.getElementById(sectionId + '-grid');
+            const items = container.getElementsByClassName('product-card');
+            for (let item of items) {
+                const itemCat = item.getAttribute('data-category');
+                if (itemCat === category) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            }
+        }
+
+        // 3. GOING BACK TO CATEGORIES
+        function resetCategories(sectionId) {
+            const catGrid = document.getElementById(sectionId + '-cats');
+            if(catGrid) catGrid.style.display = 'grid';
+            const prodCont = document.getElementById(sectionId + '-products');
+            if(prodCont) prodCont.classList.remove('active');
         }
     </script>
 
