@@ -184,51 +184,6 @@
         #heritage .cat-card { background: white; border: 1px solid #ddd; color: var(--black-base); }
         #heritage .cat-card:hover { border-color: var(--black-base); background: #fafafa; }
 
-        /* --- FEATURED SECTIONS (BEST SELLERS & NEW ARRIVALS) --- */
-        .featured-section {
-            max-width: 1200px; margin: 0 auto 80px auto; padding: 0 20px;
-        }
-        .feat-title {
-            text-align: center; font-family: 'Cinzel', serif; font-size: 2rem; margin-bottom: 30px;
-            display: flex; align-items: center; justify-content: center; gap: 15px;
-        }
-        .feat-title::before, .feat-title::after {
-            content: ''; height: 1px; width: 50px; background: var(--gold-primary); display: block;
-        }
-        
-        .feat-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;
-        }
-        
-        .feat-card {
-            background: #111; border: 1px solid #222; position: relative; cursor: pointer; transition: 0.3s;
-        }
-        .feat-card:hover { transform: translateY(-5px); border-color: var(--gold-primary); }
-        
-        .feat-badge {
-            position: absolute; top: 10px; left: 10px; background: var(--gold-primary); color: black;
-            padding: 5px 10px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; z-index: 2;
-        }
-        .badge-fresh { background: var(--fresh-green); color: white; }
-        
-        .feat-img {
-            height: 300px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #333;
-            overflow: hidden;
-        }
-        /* IMAGE FIX: This ensures your photos fit perfectly */
-        .feat-img img, .card-img img {
-            width: 100%; height: 100%; object-fit: cover; object-position: top;
-        }
-
-        .feat-info { padding: 15px; text-align: center; }
-        .feat-name { display: block; font-family: 'Cinzel', serif; margin-bottom: 5px; color: white; font-size: 1rem; }
-        .feat-price { color: var(--gold-primary); font-weight: 600; font-size: 0.9rem; }
-        
-        /* Heritage Specifics */
-        #heritage .feat-card { background: white; border: 1px solid #eee; }
-        #heritage .feat-img { background: #f9f9f9; color: #ddd; }
-        #heritage .feat-name { color: var(--black-base); }
-
         /* --- PRODUCT VIEW (Hidden initially) --- */
         .product-view-container { display: none; }
         .product-view-container.active { display: block; animation: fadeIn 0.5s; }
@@ -254,6 +209,10 @@
         .card-img {
             height: 320px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #333;
             overflow: hidden;
+        }
+        /* IMAGE FIX: This ensures your photos fit perfectly */
+        .card-img img {
+            width: 100%; height: 100%; object-fit: cover; object-position: top;
         }
 
         .card-info { padding: 20px; text-align: center; }
@@ -367,125 +326,66 @@
             </div>
         </div>
 
-        <!-- BEST SELLERS: HERITAGE -->
-        <div class="featured-section">
-            <h3 class="feat-title">Heritage Best Sellers</h3>
-            <div class="feat-grid">
-                <div class="feat-card">
-                    <div class="feat-badge">Most Loved</div>
-                    <div class="feat-img">
-                        <img src="Screenshot%202025-11-24%20164040.png" alt="Cocoa Silk Kurta">
-                    </div>
-                    <div class="feat-info">
-                        <span class="feat-name">Cocoa Silk Kurta</span>
-                        <span class="feat-price">₹ 1,800</span>
-                    </div>
-                </div>
-                <div class="feat-card">
-                    <div class="feat-badge">Classic</div>
-                    <div class="feat-img">
-                        <img src="Screenshot%202025-11-24%20163917.png" alt="Maroon Earth Kurta">
-                    </div>
-                    <div class="feat-info">
-                        <span class="feat-name">Maroon Earth Spun</span>
-                        <span class="feat-price">₹ 1,799</span>
-                    </div>
-                </div>
-                <div class="feat-card">
-                    <div class="feat-badge">Comfort</div>
-                    <div class="feat-img">
-                        <img src="Screenshot%202025-11-24%20164224.png" alt="Stone Beige Kurta">
-                    </div>
-                    <div class="feat-info">
-                        <span class="feat-name">Stone Beige Heritage</span>
-                        <span class="feat-price">₹ 1,599</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- NEW ARRIVALS: HERITAGE -->
-        <div class="featured-section">
-            <h3 class="feat-title">New Arrivals</h3>
-            <div class="feat-grid">
-                <div class="feat-card">
-                    <div class="feat-badge badge-fresh">Just In</div>
-                    <div class="feat-img">
-                        <img src="Screenshot%202025-11-24%20163510.png" alt="Peach Sunrise Kurta">
-                    </div>
-                    <div class="feat-info">
-                        <span class="feat-name">Peach Sunrise Kurta</span>
-                        <span class="feat-price">₹ 1,499</span>
-                    </div>
-                </div>
-                <div class="feat-card">
-                    <div class="feat-badge badge-fresh">Just In</div>
-                    <div class="feat-img">
-                        <img src="Screenshot%202025-11-24%20163845.png" alt="Azure Sky Kurta">
-                    </div>
-                    <div class="feat-info">
-                        <span class="feat-name">Azure Sky Linear</span>
-                        <span class="feat-price">₹ 1,399</span>
-                    </div>
-                </div>
-                <div class="feat-card">
-                    <div class="feat-badge badge-fresh">New Season</div>
-                    <div class="feat-img">
-                        <img src="Screenshot%202025-11-24%20163647.png" alt="Cerulean Breeze Kurta">
-                    </div>
-                    <div class="feat-info">
-                        <span class="feat-name">Cerulean Breeze</span>
-                        <span class="feat-price">₹ 1,450</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- PRODUCT LIST (HIDDEN) -->
         <div id="heritage-products" class="product-view-container">
             <div style="text-align: center;">
                 <button class="back-btn" onclick="resetCategories('heritage')">← Back to Categories</button>
             </div>
             <div class="grid" id="heritage-grid">
-                <!-- Product 1 -->
+                <!-- KURTAS (K1 - K8) -->
                 <div class="product-card" data-category="kurta">
-                    <div class="card-img"><img src="Screenshot%202025-11-24%20163510.png" alt="Peach Kurta"></div>
+                    <div class="card-img"><img src="k%20(1).png" alt="Peach Kurta"></div>
                     <div class="card-info"><span class="p-cat">Kurta</span><span class="p-name">Peach Sunrise Kurta</span><span class="p-price">₹ 1,499</span></div>
                 </div>
-                <!-- Product 2 -->
                 <div class="product-card" data-category="kurta">
-                    <div class="card-img"><img src="Screenshot%202025-11-24%20163617.png" alt="Grey Kurta"></div>
+                    <div class="card-img"><img src="k%20(2).png" alt="Grey Kurta"></div>
                     <div class="card-info"><span class="p-cat">Kurta</span><span class="p-name">Slate Grey Classic</span><span class="p-price">₹ 1,699</span></div>
                 </div>
-                <!-- Product 3 -->
                 <div class="product-card" data-category="kurta">
-                    <div class="card-img"><img src="Screenshot%202025-11-24%20163845.png" alt="Azure Kurta"></div>
+                    <div class="card-img"><img src="k%20(3).png" alt="Azure Kurta"></div>
                     <div class="card-info"><span class="p-cat">Kurta</span><span class="p-name">Azure Sky Linear</span><span class="p-price">₹ 1,399</span></div>
                 </div>
-                <!-- Product 4 -->
                 <div class="product-card" data-category="kurta">
-                    <div class="card-img"><img src="Screenshot%202025-11-24%20163917.png" alt="Maroon Kurta"></div>
+                    <div class="card-img"><img src="k%20(4).png" alt="Maroon Kurta"></div>
                     <div class="card-info"><span class="p-cat">Kurta</span><span class="p-name">Maroon Earth Spun</span><span class="p-price">₹ 1,799</span></div>
                 </div>
-                <!-- Product 5 -->
                 <div class="product-card" data-category="kurta">
-                    <div class="card-img"><img src="Screenshot%202025-11-24%20164224.png" alt="Stone Beige Kurta"></div>
+                    <div class="card-img"><img src="k%20(5).png" alt="Stone Beige Kurta"></div>
                     <div class="card-info"><span class="p-cat">Kurta</span><span class="p-name">Stone Beige Heritage</span><span class="p-price">₹ 1,599</span></div>
                 </div>
-                <!-- Product 6 -->
                 <div class="product-card" data-category="kurta">
-                    <div class="card-img"><img src="Screenshot%202025-11-24%20164040.png" alt="Cocoa Kurta"></div>
+                    <div class="card-img"><img src="k%20(6).png" alt="Cocoa Kurta"></div>
                     <div class="card-info"><span class="p-cat">Kurta</span><span class="p-name">Cocoa Silk Kurta</span><span class="p-price">₹ 1,800</span></div>
                 </div>
-                <!-- Product 7 -->
                 <div class="product-card" data-category="kurta">
-                    <div class="card-img"><img src="Screenshot%202025-11-24%20163553.png" alt="Mauve Kurta"></div>
+                    <div class="card-img"><img src="k%20(7).png" alt="Mauve Kurta"></div>
                     <div class="card-info"><span class="p-cat">Kurta</span><span class="p-name">Mauve Mist Kurta</span><span class="p-price">₹ 1,299</span></div>
                 </div>
-                <!-- Product 8 -->
                 <div class="product-card" data-category="kurta">
-                    <div class="card-img"><img src="Screenshot%202025-11-24%20163647.png" alt="Cerulean Kurta"></div>
+                    <div class="card-img"><img src="k%20(8).png" alt="Cerulean Kurta"></div>
                     <div class="card-info"><span class="p-cat">Kurta</span><span class="p-name">Cerulean Breeze</span><span class="p-price">₹ 1,450</span></div>
+                </div>
+
+                <!-- LUNGIS (L1 - L5) -->
+                <div class="product-card" data-category="lungi">
+                    <div class="card-img"><img src="L%20(1).png" alt="Sunshine Lungi"></div>
+                    <div class="card-info"><span class="p-cat">Lungi</span><span class="p-name">Sunshine Stripe Lungi</span><span class="p-price">₹ 450</span></div>
+                </div>
+                <div class="product-card" data-category="lungi">
+                    <div class="card-img"><img src="L%20(2).png" alt="Green Border Lungi"></div>
+                    <div class="card-info"><span class="p-cat">Lungi</span><span class="p-name">Classic Green Border</span><span class="p-price">₹ 350</span></div>
+                </div>
+                <div class="product-card" data-category="lungi">
+                    <div class="card-img"><img src="L%20(3).png" alt="Orange Lungi"></div>
+                    <div class="card-info"><span class="p-cat">Lungi</span><span class="p-name">Rustic Orange Handloom</span><span class="p-price">₹ 550</span></div>
+                </div>
+                <div class="product-card" data-category="lungi">
+                    <div class="card-img"><img src="L%20(4).png" alt="Temple Border Lungi"></div>
+                    <div class="card-info"><span class="p-cat">Lungi</span><span class="p-name">Temple Border Dhoti</span><span class="p-price">₹ 600</span></div>
+                </div>
+                <div class="product-card" data-category="lungi">
+                    <div class="card-img"><img src="L%20(5).png" alt="Olive Lungi"></div>
+                    <div class="card-info"><span class="p-cat">Lungi</span><span class="p-name">Olive Edge Premium</span><span class="p-price">₹ 500</span></div>
                 </div>
                 
                 <!-- Placeholders for other categories so grid isn't empty when filtered -->
@@ -496,10 +396,6 @@
                 <div class="product-card" data-category="jacket">
                     <div class="card-img"><span style="font-size: 3rem;">🧥</span></div>
                     <div class="card-info"><span class="p-cat">Jacket</span><span class="p-name">Nehru Vest</span><span class="p-price">₹ 1,899</span></div>
-                </div>
-                <div class="product-card" data-category="lungi">
-                    <div class="card-img"><span style="font-size: 3rem;">🧣</span></div>
-                    <div class="card-info"><span class="p-cat">Lungi</span><span class="p-name">Handloom White Lungi</span><span class="p-price">₹ 799</span></div>
                 </div>
             </div>
         </div>
@@ -565,68 +461,6 @@
             </div>
             <div class="cat-card" onclick="openCategory('hive', 'trouser')">
                 <div class="cat-icon">👖</div><div class="cat-name">Trousers</div>
-            </div>
-        </div>
-
-        <!-- BEST SELLERS: HIVE -->
-        <div class="featured-section">
-            <h3 class="feat-title" style="color: white;">Trending Drops</h3>
-            <div class="feat-grid">
-                <div class="feat-card">
-                    <div class="feat-badge" style="background: var(--neon-blue);">Sold Fast</div>
-                    <div class="feat-img"><span style="font-size: 3rem;">🧥</span></div>
-                    <div class="feat-info">
-                        <span class="feat-name">Stealth Black Hoodie</span>
-                        <span class="feat-price">₹ 3,499</span>
-                    </div>
-                </div>
-                <div class="feat-card">
-                    <div class="feat-badge" style="background: var(--neon-blue);">New Tech</div>
-                    <div class="feat-img"><span style="font-size: 3rem;">🏃</span></div>
-                    <div class="feat-info">
-                        <span class="feat-name">Hive Tech Joggers</span>
-                        <span class="feat-price">₹ 2,199</span>
-                    </div>
-                </div>
-                <div class="feat-card">
-                    <div class="feat-badge" style="background: var(--neon-blue);">Hot</div>
-                    <div class="feat-img"><span style="font-size: 3rem;">👔</span></div>
-                    <div class="feat-info">
-                        <span class="feat-name">Oversized Khadi Tee</span>
-                        <span class="feat-price">₹ 1,499</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- NEW ARRIVALS: HIVE -->
-        <div class="featured-section">
-            <h3 class="feat-title" style="color: white;">Fresh Arrivals</h3>
-            <div class="feat-grid">
-                <div class="feat-card">
-                    <div class="feat-badge badge-fresh">Fresh Drop</div>
-                    <div class="feat-img"><span style="font-size: 3rem;">🦺</span></div>
-                    <div class="feat-info">
-                        <span class="feat-name">Cyber-Grid Vest</span>
-                        <span class="feat-price">₹ 2,899</span>
-                    </div>
-                </div>
-                <div class="feat-card">
-                    <div class="feat-badge badge-fresh">Fresh Drop</div>
-                    <div class="feat-img"><span style="font-size: 3rem;">👖</span></div>
-                    <div class="feat-info">
-                        <span class="feat-name">Neon-Stitch Tracks</span>
-                        <span class="feat-price">₹ 2,399</span>
-                    </div>
-                </div>
-                <div class="feat-card">
-                    <div class="feat-badge badge-fresh">Ltd Edition</div>
-                    <div class="feat-img"><span style="font-size: 3rem;">👕</span></div>
-                    <div class="feat-info">
-                        <span class="feat-name">Hive Mesh Polo</span>
-                        <span class="feat-price">₹ 1,899</span>
-                    </div>
-                </div>
             </div>
         </div>
 
